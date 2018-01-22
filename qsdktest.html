@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>qsdktest</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+</head>
+<body>
+<h1>qsdktest</h1>
+</body>
+
+<script src="http://sdkapi02.quicksdk.net/static/lib/libQuickSDKH5_To_Client.js"></script>
+
+<script charset="utf-8">
+
+	log("=== debug info ===")
+	log("init quicksdk start")
+
+	var productCode = '04943838744090570821883811669650';        //QuickSDK后台自动分配
+	var productKey = '05443721';        //QuickSDK后台自动分配
+	QuickSDK.init(productCode,productKey,true);
+	log("initing quicksdk end")
+
+	QuickSDK.logout(function(logoutObject){
+		log('Game:成功退出游戏');
+	});
+
+	QuickSDK.setLogoutNotification(function(logoutObject){
+		log('Game:玩家点击注销帐号');
+	});
+
+
+	log("login quicksdk start");
+	QuickSDK.login(function(callbackData){
+		var message;
+		if(callbackData.status){
+		   message = 'GameDemo:QuickSDK登录成功: uid=>' + callbackData.data.uid;
+		}else{
+		 message = 'GameDemo:QuickSDK登录失败:' + callbackData.message;
+		}
+		log(message);
+	});
+	log("login quicksdk end");
+
+	QuickSDK.setSwitchAccountNotification(function(callbackData){
+    	log("SwitchAccountNotification callbackData: " + callbackData);
+ 	});
+
+
+ 	function log(msg){
+ 		document.write(msg + "<br/>");
+ 	}
+
+
+</script>
+</html>
